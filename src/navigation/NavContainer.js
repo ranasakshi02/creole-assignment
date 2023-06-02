@@ -1,47 +1,47 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-
+import {Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/Dashboard/HomeScreen';
 import History from '../screens/Dashboard/History';
+import Setting from '../screens/Dashboard/Setting';
+import Profile from '../screens/Dashboard/Profile';
+import imgPath from '../../assets/imgPath';
+import Login from '../screens/Login';
+import Register from '../screens/Register';
 
 const NavContainer = () => {
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
-  const PatientTabNav = () => {
-
+  const DashboardTabs = () => {
     return (
       <Tab.Navigator
         initialRouteName={'Home'}
         screenOptions={{
-          showLabel: false,
+          showLabel: true,
           style: {
             height: 100,
-            backgroundColor:"#fff",
+            backgroundColor: "#038B12",
             borderTopColor: 'transparent',
           },
+          tabBarActiveTintColor: '#FFF',
+          tabBarInactiveTintColor: '#1B1C1E',
+          tabBarStyle: {backgroundColor: "#038B12"},
+          tabBarLabelStyle: {fontWeight: '700', marginBottom: 5},
         }}>
         <Tab.Screen
           name="Home"
           component={HomeScreen}
           options={{
             headerStyle: {
-              backgroundColor: Colors.Primary,
+              backgroundColor: "#038B12",
             },
-            headerShown: false,
-            title: '',
-            // headerTitle: 'Reminders',
-            // tabBarIcon: ({focused}) => {
-            //   return (
-            //     <Tabicon
-            //       focused={focused}
-            //       unfocusedSvg={Reminder}
-            //       focusedSvg={ReminderFill}
-            //       label="Reminders"
-            //     />
-            //   );
-            // },
+            headerShown: true,
+            title: 'Home',
+            headerTitleAlign: 'center',
+            headerTitleStyle:{color:'#FFF'},
+            tabBarIcon: () => <Image source={imgPath.home} />,
           }}
         />
 
@@ -50,74 +50,41 @@ const NavContainer = () => {
           component={History}
           options={{
             headerStyle: {
-              backgroundColor: Colors.Primary,
+              backgroundColor: "#038B12",
             },
-            headerShown: false,
-            title: '',
+            headerShown: true,
+            title: 'History',
             headerTitle: 'History',
-            tabBarIcon: ({focused}) => {
-              return (
-                <Tabicon
-                  focused={focused}
-                  unfocusedSvg={Appointment}
-                  focusedSvg={AppointmentFill}
-                  label="Appointments"
-                />
-              );
-            },
+            headerTitleAlign: 'center',headerTitleStyle:{color:'#FFF'},
+            tabBarIcon: () => <Image source={imgPath.history} />,
           }}
         />
         <Tab.Screen
-          name="Home"
-          component={PatientDashBoard}
+          name="Setting"
+          component={Setting}
           options={{
-            headerShown: false,
-            title: '',
-            tabBarIcon: ({focused}) => {
-              return (
-                <Tabicon
-                  focused={focused}
-                  unfocusedSvg={Home}
-                  focusedSvg={HomeFill}
-                  label="Home"
-                />
-              );
+            headerStyle: {
+              backgroundColor: "#038B12",
             },
+            headerShown: true,
+            title: 'Setting',
+            headerTitleAlign: 'center',headerTitleStyle:{color:'#FFF'},
+            tabBarIcon: () => <Image source={imgPath.setting} />,
           }}
         />
         <Tab.Screen
-          name="Message"
-          component={MessageScreen}
+          name="Profile"
+          component={Profile}
           options={{
-            tabBarBadge: notificationCount !== 0 ? notificationCount : null,
-            tabBarBadgeStyle: {backgroundColor: Colors.Alert},
             headerShown: true,
             headerStyle: {
-              backgroundColor: Colors.Primary,
+              backgroundColor: "#038B12",
             },
-
-            title: '',
-            headerTitle: 'Message',
-            headerTitleAlign: 'center',
-            headerTitleStyle: {
-              fontFamily: 'Lato-Bold',
-              fontSize: 16,
-              textAlign: 'center',
-              color: Colors.White,
-            },
-            tabBarIcon: ({focused}) => {
-              return (
-                <Tabicon
-                  focused={focused}
-                  unfocusedSvg={Message}
-                  focusedSvg={MessageFill}
-                  label="Message"
-                />
-              );
-            },
+            title: 'Profile',
+            headerTitleAlign: 'center',headerTitleStyle:{color:'#FFF'},
+            tabBarIcon: () => <Image source={imgPath.profile} />,
           }}
         />
-      
       </Tab.Navigator>
     );
   };
@@ -127,49 +94,9 @@ const NavContainer = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen component={HomeScreen} name="Home" />
-      {/* <Stack.Screen
-        component={RestaurantList}
-        name="RestaurantList"
-        options={{
-          headerShown: true,
-          headerTitle: 'RestaurantList',
-          headerStyle: {backgroundColor: '#00C247'},
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontSize: 16,
-            fontWeight: '600',
-          },
-          headerBackImage: () => (
-            <View style={{marginStart: 15}}>
-              <Text style={{color:'#fff',fontSize:15,fontWeight:'500'}}>Back</Text>
-            </View>
-          ),
-          headerBackTitle: '',
-        }}
-      />
-     <Stack.Screen
-        component={RestaurantDetails}
-        name="RestaurantDetails"
-        options={{
-          headerShown: true,
-          headerTitle: 'RestaurantDetails',
-          headerStyle: {backgroundColor: '#00C247'},
-          headerTitleAlign: 'center',
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontSize: 16,
-            fontWeight: '600',
-          },
-          headerBackImage: () => (
-            <View style={{marginStart: 15}}>
-            <Text style={{color:'#fff',fontSize:15,fontWeight:'500'}}>Back</Text>
-          </View>
-          ),
-          headerBackTitle: '',
-        }}
-      /> */}
+      <Stack.Screen component={Login} name="Login" />
+      <Stack.Screen component={Register} name="Register" />
+      <Stack.Screen component={DashboardTabs} name="Dashboard" />
     </Stack.Navigator>
   );
 };
